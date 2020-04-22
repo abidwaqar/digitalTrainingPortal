@@ -1,0 +1,67 @@
+﻿@model Digital_Training_Portal.Models.CourseDeliveryViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome!</h1>
+    <p class="lead">
+        “The beautiful thing about learning is that nobody can take it away from you.” – B.B. King
+    </p>
+    <hr class="my-4">
+    <p>Learn courses at low costs with flexible timings and locations.</p>
+    <a class="btn btn-primary btn-lg" href="#" onclick="alert('Sorry, there is nothing more to learn');" role="button">Learn more</a>
+</div>
+
+<form asp-controller="Home" asp-action="Catalogue" method="get" class="input-group ">
+    <input type="text" asp-for="SearchString" placeholder="Search" class="form-control" />
+
+    <select class="custom-select" asp-for="CourseDMString" asp-items="Model.DeliveryMethod">
+        <option value="">All</option>
+    </select>
+
+    <input type="submit" value="Search" class=" btn btn-success btn-search" />
+</form>
+
+<!-- SEARCH AND FILTERS END -->
+
+<hr>
+
+<div>
+    <h2 class="heading">Courses You Might Like</h2>
+    <!-- GRID SYSTEM -->
+    <div class="row">
+        @foreach (var course in Model.Courses)
+        {
+            <a asp-controller="Home" asp-action="Course" asp-route-id="@course.Id" class="card col-md-3 stretched-link text-decoration-none" style="width: 18rem;">
+                <img src="~/Images/ITC.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@course.Title</h5>
+                    <p class="card-text">@course.Description</p>
+                    <div class="card-footer">@course.DeliveryMethod</div>
+                </div>
+            </a>
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="mt-2">
+    <h2 class="heading">Delivery Methods</h2>
+    <!-- GRID SYSTEM -->
+    <div class="row">
+        @foreach (var course in Model.Courses)
+        {
+            <a asp-controller="Home" asp-action="Course" asp-route-id="@course.Id" class="card col-md-3 stretched-link text-decoration-none" style="width: 18rem;">
+                <img src="~/Images/ITC.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@course.Title</h5>
+                    <p class="card-text">@course.Description</p>
+                    <div class="card-footer">@course.DeliveryMethod</div>
+                </div>
+            </a>
+        }
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model Digital_Training_Portal.Models.CourseDeliveryViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<form asp-controller="Home" asp-action="Catalogue" method="get" class="input-group ">
+    <input type="text" asp-for="SearchString" placeholder="Search" class="form-control" />
+
+    <select class="custom-select" asp-for="CourseDMString" asp-items="Model.DeliveryMethod">
+        <option value="">All</option>
+    </select>
+
+    <input type="submit" value="Search" class=" btn btn-success btn-search" />
+</form>
+
+
+<!-- SEARCH AND FILTERS END -->
+
+<hr>
+
+<div>
+    <!-- GRID SYSTEM -->
+    <div class="row">
+        @foreach (var course in Model.Courses)
+        {
+            <a asp-controller="Home" asp-action="Course" asp-route-id="@course.Id" class="card col-md-3 stretched-link text-decoration-none" style="width: 18rem;">
+                <img src="~/Images/ITC.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@course.Title</h5>
+                    <p class="card-text">@course.Description</p>
+                    <div class="card-footer">@course.DeliveryMethod</div>
+                </div>
+            </a>
+        }
+    </div>
+</div>
